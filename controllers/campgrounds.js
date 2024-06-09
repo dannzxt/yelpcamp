@@ -11,7 +11,7 @@ module.exports.index = async (req, res) => {
 
 module.exports.renderNewForm = (req, res) => {
   res.render("campgrounds/new");
-};
+}; // EEEEEEEE
 
 module.exports.createCampground = async (req, res, next) => {
   const geoData = await geocoder
