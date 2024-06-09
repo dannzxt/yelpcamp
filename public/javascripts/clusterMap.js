@@ -40,7 +40,7 @@ map.on("load", () => {
         10,
         "#2196F3",
         30,
-        "#3F5185",
+        "#3F51B5",
       ],
       "circle-radius": ["step", ["get", "point_count"], 15, 10, 20, 30, 25],
     },
@@ -78,7 +78,7 @@ map.on("load", () => {
     });
     const clusterId = features[0].properties.cluster_id;
     map
-      .getSource("earthquakes")
+      .getSource("campgrounds")
       .getClusterExpansionZoom(clusterId, (err, zoom) => {
         if (err) return;
 

@@ -21,7 +21,7 @@ const reviewRoutes = require("./routes/reviews");
 
 const MongoDBStore = require("connect-mongo")(session);
 
-const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017/yelp-camp"; // FIXME
+const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017/yelp-camp";
 
 mongoose.connect(dbUrl);
 
@@ -42,7 +42,7 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(mongoSanitize({ replaceWith: "_" }));
 
-const secret = process.env.SECRET || "thisshouldbeabettersecret!"; // FIXME
+const secret = process.env.SECRET || "thisshouldbeabettersecret!";
 
 const store = new MongoDBStore({
   url: dbUrl,
