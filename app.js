@@ -21,7 +21,8 @@ const reviewRoutes = require("./routes/reviews");
 
 const MongoDBStore = require("connect-mongo")(session);
 
-const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017/yelp-camp";
+// const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017/yelp-camp";
+const dbUrl = "mongodb://127.0.0.1:27017/yelp-camp";
 
 mongoose.connect(dbUrl);
 
@@ -88,6 +89,7 @@ const styleSrcUrls = [
   "https://api.tiles.mapbox.com/",
   "https://fonts.googleapis.com/",
   "https://use.fontawesome.com/",
+  "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css",
 ];
 
 const connectSrcUrls = [
@@ -97,7 +99,9 @@ const connectSrcUrls = [
   "https://events.mapbox.com/",
 ];
 
-const fontSrcUrls = [];
+const fontSrcUrls = [
+  "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/fonts/",
+];
 
 app.use(
   helmet.contentSecurityPolicy({
@@ -128,7 +132,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-  if (!["/login", "/"].includes(req.originalUrl)) {
+  if (!["/login", "/register", "/"].includes(req.originalUrl)) {
     req.session.returnTo = req.originalUrl;
   }
   res.locals.currentUser = req.user;

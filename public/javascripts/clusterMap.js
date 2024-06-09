@@ -2,7 +2,7 @@ mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
   container: "cluster-map",
   style: "mapbox://styles/mapbox/light-v11",
-  center: [-103.5917, 40.6699],
+  center: [-51.6197890205486, -9.58890301712257],
   zoom: 3,
 });
 
@@ -65,7 +65,7 @@ map.on("load", () => {
     filter: ["!", ["has", "point_count"]],
     paint: {
       "circle-color": "#11b4da",
-      "circle-radius": 4,
+      "circle-radius": 8,
       "circle-stroke-width": 1,
       "circle-stroke-color": "#fff",
     },
