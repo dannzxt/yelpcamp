@@ -21,10 +21,9 @@ const reviewRoutes = require("./routes/reviews");
 
 const MongoDBStore = require("connect-mongo")(session);
 
-// const dbUrl = process.env.DB_URL;
-// mongoose.connect(dbUrl);
-const dbUrl = "mongodb://127.0.0.1:27017/yelp-camp";
+const dbUrl = process.env.DB_URL;
 mongoose.connect(dbUrl);
+// const dbUrl = "mongodb://127.0.0.1:27017/yelp-camp";
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -45,7 +44,7 @@ app.use(mongoSanitize({ replaceWith: "_" }));
 
 const store = new MongoDBStore({
   url: dbUrl,
-  secret: "thisshouldbeabettersecret!",
+  secret: process.env.SECRET,
   touchAfter: 24 * 60 * 60,
 });
 
@@ -56,12 +55,12 @@ store.on("error", function (e) {
 const sessionConfig = {
   store,
   name: "session",
-  secret: "thisshouldbeabettersecret!",
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
     httpOnly: true, // security
-    // secure: true, // also security, but will break things before deployment
+    secure: true, // also security, but will break things before deployment
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
